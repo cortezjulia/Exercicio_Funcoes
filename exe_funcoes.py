@@ -1,8 +1,31 @@
+
 #EXERCÍCIO PARA PRÁTICA DE FUNÇÕES
 #O PROGRAMA RECEBE VALORES NUMÉRICOS DO USUÁRIO, MULTIPLICA ELES 
 #E RETORNA SE SÃO PARES OU IMPARES
 
-def recebe_entrada_usuario(*args):
+import os
+
+def insere_num(quantidade_numeros):
+   
+    while True:
+        flag=0
+        numeros=[]
+        i=0
+        while i<quantidade_numeros:
+            num_digitado=input('Insira um número: ')
+            try:
+                num_digitado_float=float(num_digitado)
+                numeros.append(num_digitado_float)
+                flag+=1
+            except:
+                print('Insira um número!')
+                break
+            i+=1
+        if flag==quantidade_numeros:
+            break
+    return numeros
+
+def multiplica(*args):
     multiplicacao=0  
     ini=0
     for numero in args:
@@ -12,63 +35,7 @@ def recebe_entrada_usuario(*args):
             ini=1
         else:    
             multiplicacao=multiplicacao*numero
-    return multiplicacao
-
-def entrar_numeros():
-    while True:
-        i=0
-        entrada_int=[]
-        entrada_string=[]
-
-
-        entrada=input('Insira os números que deseja multiplicar: Formato [x,x,x...]: ')
-
-        i=0
-        indice=0
-
-
-        while i<len(entrada):
-
-
-
-            if entrada[i]==',':
-
-                if entrada[i]==entrada[i-1] and entrada[i]==entrada[i+1]:
-                    print('Insira valores válidos!') 
-                    break
-
-
-                entrada_string.append(entrada[indice:i])
-                indice=i+1
-            else:
-               try:
-                verifica_int=int(entrada[i])
-                verifica_float=float(entrada[i])
-               except:
-                print('Insira valores válidos!') 
-                break
-
-
-            if i==(len(entrada)-1):
-                k=len(entrada)-1
-                while True:
-                    k-=1
-                    if entrada[k]==',':
-                        entrada_string.append(entrada[k+1:len(entrada)])
-
-
-
-            i+=1
-
-    def transforma_int(entrada_int,entrada_string):
-
-    for valor in entrada_string:
-        entrada_int.append(int(valor))
-
-        resultado=recebe_entrada_usuario(*entrada_int)
-
-        print(f'O resultado da multiplicação é: {resultado}')
-        par_e_impar(*entrada_int)    
+    return multiplicacao 
 
 
 def par_e_impar(*args):
@@ -77,9 +44,29 @@ def par_e_impar(*args):
             print(f'O {numero} é par')
         else:
             print(f'O {numero} é ímpar')
+    
+
+
+
+while True:
+    os.system('cls')
+    recebe_numeros=[]
+    qnt=input('Digite quantos números você quer inserir: ')
+    try:
+        qnt_int=int(qnt)
+    except:
+        print('Apenas números!')
+        continue
+
+    recebe_numeros=insere_num(qnt_int)
+    result_multi=multiplica(*recebe_numeros)
+    os.system('cls')
+    par_e_impar(*recebe_numeros)
+    print(f'O resultado da multiplicação é: {result_multi}')
+   
+   
 
 
 
 
 
-entrar_numeros()
